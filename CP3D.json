@@ -1,0 +1,9 @@
+{
+	"env": [
+		{
+			"CP3D": "F:/HoudiniResources/Packages/ChrisP3D_Houdini/ChrisP3D_Houdini"
+		},
+	],
+	"path": "$CP3D"
+	
+}
