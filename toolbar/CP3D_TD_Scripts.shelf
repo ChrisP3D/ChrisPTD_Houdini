@@ -9,4 +9,46 @@
     <memberTool name="overwrite_startup_hip"/>
     <memberTool name="tool_1"/>
   </toolshelf>
+
+  <toolshelf name="vellumSetups" label="Vellum Setups">
+    <memberTool name="geo8"/>
+    <memberTool name="EntgmaVellumSetups"/>
+  </toolshelf>
+
+  <toolshelf name="TopSetups" label="TopSetups">
+    <memberTool name="topnet"/>
+    <memberTool name="topnet0"/>
+  </toolshelf>
+
+  <toolshelf name="rocks" label="Rock Creation">
+    <memberTool name="geo2"/>
+    <memberTool name="geo5"/>
+  </toolshelf>
+
+  <toolshelf name="miscSetups" label="Misc">
+    <memberTool name="geo7"/>
+    <memberTool name="subnet0"/>
+    <memberTool name="geo9"/>
+    <memberTool name="geo10"/>
+    <memberTool name="geo11"/>
+    <memberTool name="geo12"/>
+    <memberTool name="geo13"/>
+    <memberTool name="geo15"/>
+    <memberTool name="geo16"/>
+    <memberTool name="geo17"/>
+  </toolshelf>
+
+  <toolshelf name="instancetools" label="Instancing Setups">
+    <memberTool name="scatteringNew"/>
+    <memberTool name="subnet"/>
+    <memberTool name="geo"/>
+    <memberTool name="geo0"/>
+    <memberTool name="geo1"/>
+    <memberTool name="geo14"/>
+  </toolshelf>
+
+  <toolshelf name="Glyphs" label="Glyphs">
+    <memberTool name="geo4"/>
+    <memberTool name="geo6"/>
+  </toolshelf>
 </shelfDocument>

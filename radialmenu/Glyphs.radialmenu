@@ -1,0 +1,100 @@
+{
+	"fileversion":"19.5.752",
+	"name":"Glyphs",
+	"categories":"Standard",
+	"pane":"network",
+	"label":"Glyphs",
+	"type":"submenu",
+	"items":{
+		"0":{
+			"label":"Glyph Generator (Dev)",
+			"shortcut":"W",
+			"type":"script_action",
+			"icon":"SOP_subnet",
+			"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Glyph_Generator::1.0')"
+		},
+		"2":{
+			"label":"2D/3D",
+			"shortcut":"A",
+			"type":"submenu",
+			"items":{
+				"2":{
+					"label":"Curve To Surface Glyph (Dev)",
+					"shortcut":"A",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Curve_to_Surface_Glyph::1.0')"
+				},
+				"6":{
+					"label":"Surface_to_Mesh_Glyph (Dev)",
+					"shortcut":"D",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Surface_to_Mesh_Glyph::3.0')"
+				}
+			}
+		},
+		"4":{
+			"label":"Utilities",
+			"shortcut":"S",
+			"type":"submenu",
+			"items":{
+				"2":{
+					"label":"Create Path (Dev)",
+					"shortcut":"A",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_create_paths_glyph::1.0')"
+				},
+				"3":{
+					"label":"Clip Mirror Choice (Dev)",
+					"shortcut":"Z",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_ClipMirrorChoice::1.0')"
+				}
+			}
+		},
+		"6":{
+			"label":"Sym and Deform",
+			"shortcut":"D",
+			"type":"submenu",
+			"items":{
+				"0":{
+					"label":"Clip Mirror Choice (Dev)",
+					"shortcut":"W",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_ClipMirrorChoice::1.0')"
+				},
+				"2":{
+					"label":"Quadratic Symmety (Dev)",
+					"shortcut":"A",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Quadratic_Symmetry_Glyphs::1.1')"
+				},
+				"4":{
+					"label":"Radial Symmetry (Dev)",
+					"shortcut":"S",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'tophe::dev::sop_radial_symmetry::1.0')"
+				},
+				"6":{
+					"label":"Polar Deform (Dev)",
+					"shortcut":"D",
+					"type":"script_action",
+					"icon":"SOP_subnet",
+					"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Polar_Deform::1.0')"
+				}
+			}
+		},
+		"7":{
+			"label":"Glyph Patterns",
+			"type":"script_action",
+			"icon":"SOP_subnet",
+			"script":"radialmenu.runShelfTool(kwargs, 'Chris::dev::sop_Glyph_Patterns::1.1')"
+		}
+	}
+}

@@ -1,0 +1,16 @@
+h.tool:overwrite_startup_hip	"Overwrite Startup Hip"	"Shelf Tool: Overwrite Startup Hip"	 Alt+Ctrl+~
+h.pane.wsheet.layout_up	"Layout Nodes Up"	"Layout the selected nodes along an upward trajectory"	 Alt+Ctrl+Shift+UpArrow
+h.pane.wsheet.layout_down	"Layout Nodes Down"	"Layout the selected nodes along a downward trajectory"	 Alt+Ctrl+Shift+DownArrow
+HCONTEXT	h.pane.gview.state.sop.capturelayerpaint	"capturelayerpaint Operation"	"These keys apply to the captuerlayerpaint operation."
+h.pane.gview.state.sop.capturelayerpaint.select	Select	"Select group"	 G
+h.pane.wsheet.opmenu.spreadsheet	Spreadsheet	"Open a spreadsheet window for the selected node"	 Alt+Ctrl+Shift+S
+tree.collapseall	"Collapse All"	"Collapse the current branch and all sub-branches"	 Ctrl+Shift+C
+h.pane.editparms.refreshimports	"Refresh Imports"	"Refresh selected parameter import blocks"	 Ctrl+R
+h.pane.wsheet.radial:Glyphs	"Radial Menu: Glyphs"	"Radial Menu: Glyphs"	 Alt+Ctrl+Shift+A
+ramp.set_bspline	"Set to B-Spline"	"Set the point to b-spline interpolation"	 B
+h.pane.wsheet.add_group	"Add Group"	"Add OP group"	 Ctrl+Shift+R
+ramp.set_constant	"Set to Constant"	"Set the point to constant interpolation"	 C
+h.reset_viewport	"Reset Viewport"	"Custom Menu Operation: Reset Viewport"	 Alt+Ctrl+Shift+V
+ramp.set_linear	"Set to Linear"	"Set the point to linear interpolation"	 L
+toolmgr.apply	Apply	"Apply changes"	 Ctrl+Shift+A
+h.hotkey_mgr	"Hotkey Manager"	"Open hotkey manager"	 Alt+Ctrl+Shift+H
