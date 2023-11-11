@@ -8,6 +8,9 @@
   <toolshelf name="CP3D_TD_Scripts" label="TD Scripts">
     <memberTool name="overwrite_startup_hip"/>
     <memberTool name="tool_1"/>
+    <memberTool name="subnet10"/>
+    <memberTool name="Open Parent Type Properties"/>
+    <memberTool name="Open Parent Parameter Window"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
@@ -36,6 +39,7 @@
     <memberTool name="geo15"/>
     <memberTool name="geo16"/>
     <memberTool name="geo17"/>
+    <memberTool name="geo18"/>
   </toolshelf>
 
   <toolshelf name="instancetools" label="Instancing Setups">
@@ -51,4 +55,10 @@
     <memberTool name="geo4"/>
     <memberTool name="geo6"/>
   </toolshelf>
+
+  <tool name="Open Parent Type Properties" label="Open Parent Type Properties" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[from cph import cph_ui
+
+cph_ui.openParentTypeProperties()]]></script>
+  </tool>
 </shelfDocument>

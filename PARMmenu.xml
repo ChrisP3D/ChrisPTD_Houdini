@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuDocument>
+
+    <menu>
+
+        <subMenu id="CPTD">
+            <label>CTPD</label>
+
+            <!--First Script Item-->
+            <scriptItem id= "h.cptd_test1">
+                <label>CPTD</label> 
+                <scriptCode>
+<![CDATA[print("hello there!")]]>
+                </scriptCode>
+            </scriptItem>
+            <!--First Script Item-->
+
+        </subMenu>
+    </menu>
+</menuDocument>
