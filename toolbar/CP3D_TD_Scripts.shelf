@@ -11,6 +11,10 @@
     <memberTool name="subnet10"/>
     <memberTool name="Open Parent Type Properties"/>
     <memberTool name="Open Parent Parameter Window"/>
+    <memberTool name="test"/>
+    <memberTool name="Create Sop Import"/>
+    <memberTool name="selectedNodes Info"/>
+    <memberTool name="Spare Input to Nearest Meta Data"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">

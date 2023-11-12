@@ -7,5 +7,6 @@
 
   <toolshelf name="solarisSetups" label="Solaris Setups">
     <memberTool name="subnet1"/>
+    <memberTool name="Editing Materials"/>
   </toolshelf>
 </shelfDocument>

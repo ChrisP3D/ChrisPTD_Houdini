@@ -1,3 +1,81 @@
+import hou
+from cph import cph_Utils
+
+def SelectedSopsToStage():
+    """Creates a sopimport Lop with the selected nodes as a reference. 
+    If a lopnet is one of the selected nodes, the sopimports will be created inside of the selected lopnet.
+        If no lopnets are detected the sopimports will automatically be created in /stage"""
+    
+    selectedNodes = list(hou.selectedNodes())
+    foundSelection = False
+    for node in selectedNodes:
+        if node.isNetwork():
+            if node.type() == node.type() == hou.sopNodeTypeCategory().nodeType('lopnet') or node.type() == hou.objNodeTypeCategory().nodeType('lopnet'):
+                lopnet = node
+                foundSelection = True
+                selectedNodes.remove(node)
+
+    if not foundSelection:
+        choices = []  
+        for child in hou.node('/obj').children():
+            if child.isNetwork():
+                if node.type() == child.type() == hou.sopNodeTypeCategory().nodeType('lopnet') or child.type() == hou.objNodeTypeCategory().nodeType('lopnet'):
+                    choices.append(child)
+        choices.append(hou.node('/stage'))
+
+        #two because /stage will always be added if nothing found in selection
+        if len(choices) >= 2:
+            choice_strings = [c.path() for c in choices]
+            selected_indices = hou.ui.selectFromList(
+                choice_strings,
+                exclusive=True,
+                default_choices=((0,))
+            )
+            if selected_indices is not None and len(selected_indices) == 1:
+                lopnet = choices[selected_indices[0]]
+        else:
+            lopnet = choices[0]
+
+    new_sopimports = []
+    sopimports = []
+
+    for node in lopnet.children():
+        if node.type() == hou.lopNodeTypeCategory().nodeType('sopimport'):
+            sopimports.append(node)
+    for i,node in enumerate(selectedNodes):
+        new_sopimport = lopnet.createNode('sopimport')
+
+        #set parms
+        new_sopimport.setParms({'soppath':node.path(),})
+                                # 'asreferences':1,
+                                # 'adjustxformsforipnut':0,
+                                # 'pathprefix':f"/{selectedNodes[0].parent().name()}",})
+
+        new_sopimports.append(new_sopimport)
+        
+        if i <1:
+            if len(sopimports) >0:
+                connect_first = max(sopimports, key=cph_Utils.get_digits)
+                new_sopimport.setInput(0,connect_first,0)
+                new_sopimport.moveToGoodPosition()
+        else:
+            index = i-1
+            new_sopimport.setInput(0,new_sopimports[index],0)
+            new_sopimport.moveToGoodPosition()
+
+    n_imported = len(selectedNodes)
+    if foundSelection:
+        n_imported -= 1
+    hou.ui.setStatusMessage(f'{n_imported} sopimports were added to "{lopnet.path()}"')
+
+
+def findAndConnect(checklist,name, inputIndentifier,node):
+    for i in checklist:
+        i = name
+        if i in checklist:
+            node.setInput(RSinputKey[inputIndentifier], newNode,0)
+
+
 def auto_material():
     import os    
 
@@ -65,12 +143,6 @@ def auto_material():
                 
 
 #TODO make this function work on itson
-def findAndConnect(checklist,name, inputIndentifier,node):
-    for i in checklist:
-        i = name
-        if i in checklist:
-            node.setInput(RSinputKey[inputIndentifier], newNode,0)
-
 
     #Gather file paths into a list
 
@@ -124,4 +196,5 @@ def findAndConnect(checklist,name, inputIndentifier,node):
 
 
     parent.layoutChildren()
+
 

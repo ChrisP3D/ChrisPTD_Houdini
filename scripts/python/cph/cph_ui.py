@@ -19,9 +19,9 @@ def openParentParametersFloating():
             else:
                 hou.ui.displayMessage("Select a node to open its parent's Parameter Window")
         else:
-            print("Current tab is not a Network Editor.")
+            hou.ui.displayMessage("Current tab is not a Network Editor.")
     except IndexError:
-        print("An IndexError occurred. Check if there are Network Editors and selected nodes.")
+        hou.ui.displayMessage("An IndexError occurred. Check if there are Network Editors and selected nodes.")
 
 hou.ui.openParentParametersPane = openParentParametersFloating
 
