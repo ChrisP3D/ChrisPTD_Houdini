@@ -64,8 +64,6 @@ def SelectedSopsToStage():
             new_sopimport.moveToGoodPosition()
 
     n_imported = len(selectedNodes)
-    if foundSelection:
-        n_imported -= 1
     hou.ui.setStatusMessage(f'{n_imported} sopimports were added to "{lopnet.path()}"')
 
 
