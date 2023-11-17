@@ -15,6 +15,7 @@
     <memberTool name="Create Sop Import"/>
     <memberTool name="selectedNodes Info"/>
     <memberTool name="Spare Input to Nearest Meta Data"/>
+    <memberTool name="setGeoSpreadsheetToName"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
