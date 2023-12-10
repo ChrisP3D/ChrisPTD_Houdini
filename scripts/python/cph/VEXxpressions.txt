@@ -1,0 +1,53 @@
+ attribwrangle/snippet
+    [CPH] Array Find
+    int myint = 0;
+    int frames[] = {1, 25 , 66, 225 ,35, 666, 999, 123, 534};
+    if (find(frames, @Frame)>=0) {
+        myint=1;
+    }
+
+attribwrangle/snippet
+    [CPH] PrimUV Lookup Cd
+    float distance;
+    int myprim;
+    vector myuv;
+    distance = xyzdist(1,@P, myprim, myuv);
+    vector mypos = primuv(1,'P', myprim ,myuv);
+    @Cd = prim(1,'Cd', myprim);
+
+attribwrangle/snippet
+    [CPH] For Loop
+    f[]@myarray ;
+    for (int i = 0; i<10; i++ ){
+        push(@test ,i)
+    }
+
+volumewrangle/snippet
+    [CPH] Density Ramp
+    float u = fit(@P.y,0,ch('maxin'),0,1);
+    @density *= chramp('ramp_density', u);
+
+volumewrangle/snippet
+    [CPH] Twist Volume
+    //Input 1 empty density and temperature volumes
+    //Input 2 SOP Tet Deformer
+    //Input 3 Sop TET bounds
+    //Input 4 denisty and temperature volumes with noisey attributes
+    int prim;
+    vector uvw; //alt coordinates for inside each tet
+
+    xyzdist(1, @P, prim, uvw); //returns active prim and its uvw. sets prim and uvw values
+    vector origP = primuv(2, "P", prim, uvw); //store nondeformation pos from input3
+
+    @density = volumesample(3, "density", origP);
+    @temperature = volumesample(3, "temperature", origP);
+    float angle = ch("angle") * (@P.y / ch("height"));
+
+    vector axis = chv("axis");
+    matrix3 rot = ident();
+    rotate(rot, angle, axis);
+
+    vector orig_pt = @P * rot;
+
+    @density = volumesample(0,"density", orig_pt); 
+    @temperature = volumesample(0,"temperature", orig_pt); 

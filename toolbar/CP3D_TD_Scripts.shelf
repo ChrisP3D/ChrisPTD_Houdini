@@ -16,6 +16,7 @@
     <memberTool name="selectedNodes Info"/>
     <memberTool name="Spare Input to Nearest Meta Data"/>
     <memberTool name="setGeoSpreadsheetToName"/>
+    <memberTool name="openPythonShell"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
@@ -45,6 +46,8 @@
     <memberTool name="geo16"/>
     <memberTool name="geo17"/>
     <memberTool name="geo18"/>
+    <memberTool name="geo27"/>
+    <memberTool name="geo28"/>
   </toolshelf>
 
   <toolshelf name="instancetools" label="Instancing Setups">
