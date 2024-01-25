@@ -9,16 +9,17 @@ root {
     split 0.504169 H {
         split 0.118462 H L {
             tabs 0 1 {
-                pane panetab14 -a 0 -l 10 -H /obj/ -T OBJ -m treecontrol
+                pane panetab14 -a 0 -l 10 -H /obj/render_test/render_test/ -T LOP -m treecontrol
             }
             split 0.222222 V {
                 tabs 0 1 {
-                    pane panetab1 -a 0 -l 10 -H /obj/ -T OBJ -m sceneview
-                    pane panetab11 -a 0 -l 10 -H /obj/ -T OBJ -m details
+                    pane panetab1 -a 0 -l 10 -H /obj/render_test/render_test/ -T LOP -m sceneview
+                    pane panetab11 -a 0 -l 10 -H /obj/render_test/render_test/ -T LOP -m details
+                    pane panetab8 -a 1 -l 10 -H /obj/render_test/render_test/ -T LOP -m pythonpanel
                 }
                 tabs 0 1 {
                     pane panetab4 -a 0 -l 0 -H /obj/ -T OBJ -m python
-                    pane panetab3 -a 0 -l 10 -H /obj/ -T OBJ -m details
+                    pane panetab3 -a 0 -l 10 -H /obj/render_test/render_test/ -T LOP -m details
                     pane panetab2 -a 0 -l 10 -H /ch/ -T CHOPNET -m channelview
                 }
             }
@@ -95,3 +96,4 @@ netcolumns -c display,bypass,delscript,comment,input -n LOP panetab7
 netcolumns -c delscript,comment -n MGR panetab7
 netcolumns -c delscript,comment -n DIR panetab7
 netcolumns -c delscript,comment -n DATA panetab7
+pythonpanel -s on -t off -n PackageBrowser panetab8

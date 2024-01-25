@@ -1,6 +1,7 @@
 import os
 import hou
 import sys
+
 def localDirToScanPath(dir_name):
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     tools_dir = os.path.join(cur_dir, 'cph_tools')

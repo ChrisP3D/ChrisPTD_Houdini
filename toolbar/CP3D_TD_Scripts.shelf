@@ -7,8 +7,6 @@
 
   <toolshelf name="CP3D_TD_Scripts" label="TD Scripts">
     <memberTool name="overwrite_startup_hip"/>
-    <memberTool name="tool_1"/>
-    <memberTool name="subnet10"/>
     <memberTool name="Open Parent Type Properties"/>
     <memberTool name="Open Parent Parameter Window"/>
     <memberTool name="test"/>
@@ -16,7 +14,6 @@
     <memberTool name="selectedNodes Info"/>
     <memberTool name="Spare Input to Nearest Meta Data"/>
     <memberTool name="setGeoSpreadsheetToName"/>
-    <memberTool name="openPythonShell"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">

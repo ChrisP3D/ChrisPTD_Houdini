@@ -41,4 +41,6 @@ def openParentTypeProperties():
     except IndexError:
         hou.ui.displayMessage("An IndexError occurred. Make sure a node is selected inside of a network editor.")
 
-hou.ui.openParentTyypeProperties = openParentTypeProperties
+hou.ui.openParentTypeProperties = openParentTypeProperties
+
+def makeLoadableHipShelf():
