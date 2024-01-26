@@ -14,6 +14,7 @@
     <memberTool name="selectedNodes Info"/>
     <memberTool name="Spare Input to Nearest Meta Data"/>
     <memberTool name="setGeoSpreadsheetToName"/>
+    <memberTool name="parmToMultiParm"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
@@ -65,5 +66,9 @@
     <script scriptType="python"><![CDATA[from cph import cph_ui
 
 cph_ui.openParentTypeProperties()]]></script>
+  </tool>
+
+  <tool name="parmToMultiParm" label="ConvertToMultiParm" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[]]></script>
   </tool>
 </shelfDocument>

@@ -10,7 +10,12 @@
             <scriptItem id= "h.cptd_test1">
                 <label>CPTD</label> 
                 <scriptCode>
-<![CDATA[print("hello there!")]]>
+<![CDATA[
+
+print(kwargs["parms"][0])
+from cph import cph_parmUtils
+cph_parmUtils.convertToMultiParm(kwargs["parms"][0])
+]]>
                 </scriptCode>
             </scriptItem>
             <!--First Script Item-->
