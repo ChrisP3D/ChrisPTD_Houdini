@@ -16,9 +16,13 @@ def convertToMultiParm(parm):
     
     
     expr = parm.expression()
-    spliters = ['../','#','ch(','"', "'",')','strcat']
+    spliters = ['../','#','ch(','"', "'",')','strcat',
+                'detail',
+                'point',
+                '']
     for s in spliters:
         name = expr.replace(s,"")
+        print(name)
     payload = f"ch(strcat('../{name}',detail(-1,'iteration',0)+1))"    
     parm.setExpression(payload)
     

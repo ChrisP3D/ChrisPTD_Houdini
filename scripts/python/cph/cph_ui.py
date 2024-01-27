@@ -43,4 +43,3 @@ def openParentTypeProperties():
 
 hou.ui.openParentTypeProperties = openParentTypeProperties
 
-def makeLoadableHipShelf():
