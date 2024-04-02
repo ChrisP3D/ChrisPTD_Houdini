@@ -15,6 +15,11 @@
     <memberTool name="Spare Input to Nearest Meta Data"/>
     <memberTool name="setGeoSpreadsheetToName"/>
     <memberTool name="parmToMultiParm"/>
+    <memberTool name="shelf_toggledunders"/>
+    <memberTool name="insertdunders"/>
+    <memberTool name="removedunders"/>
+    <memberTool name="multiParmRef"/>
+    <memberTool name="tool_4"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">

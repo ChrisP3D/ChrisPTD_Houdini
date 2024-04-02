@@ -87,3 +87,8 @@ def getInputsRecursive(node,in_nodes,curiter,maxiter=50,stop_on_type = ''):
                 in_nodes.append(input)
                 getOutputsRecursive(node = input, in_nodes = input.inputs(),curiter=iter,stop_on_type=stop_on_type)
     
+
+def getAllNodesOfType()
+    for child in node_to_scan.children():
+        if child.type() == file_cache_type or child.type() == labs_fc_type:
+            file_cache_nodes.append(child)

@@ -1,0 +1,18 @@
+{
+	"env": [
+		{
+			"CPH": "F:/HoudiniResources/Packages/CPH/CPH"
+		},
+		{
+			"DCA": ["F:/cache"]
+		},
+		{
+			"DCB": ["E:/cache"]
+		}
+	],
+	 
+	"path": [
+        "$CPH"
+    ]
+	
+}

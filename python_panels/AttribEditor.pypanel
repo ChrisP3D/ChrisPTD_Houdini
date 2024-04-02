@@ -105,14 +105,14 @@ class AttributeEditor(QtWidgets.QWidget):
             attrs = geo.pointAttribs()  # Example for point attributes
             values = [str(geo.attribValue(attr_name, pt)) for pt in geo.points()]
             self.model.setStringList(values)
-def update_attribute(self, attr_name, values):
-    node = get_selected_node()
-    if node:
-        geo = node.geometry()
-        with geo.beginModifiable() as mod_geo:
-            for pt, value in zip(mod_geo.points(), values):
-                pt.setAttribValue(attr_name, value)
-        node.setDisplayFlag(True)
+    def update_attribute(self, attr_name, values):
+        node = get_selected_node()
+        if node:
+            geo = node.geometry()
+            with geo.beginModifiable() as mod_geo:
+                for pt, value in zip(mod_geo.points(), values):
+                    pt.setAttribValue(attr_name, value)
+            node.setDisplayFlag(True)
 
 # To display the panel
 # app = QtWidgets.QApplication([])

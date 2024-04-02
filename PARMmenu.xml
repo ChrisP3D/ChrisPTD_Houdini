@@ -3,23 +3,45 @@
 
     <menu>
 
-        <subMenu id="CPTD">
+
+        <subMenu id="CPLib">
             <label>CTPD</label>
 
-            <!--First Script Item-->
-            <scriptItem id= "h.cptd_test1">
-                <label>CPTD</label> 
+<!--First Script Item-->
+            <scriptItem id= "h.CPlib_StringToMultiParm">
+                <label>ConvertMultiParmRef</label> 
                 <scriptCode>
 <![CDATA[
 
-print(kwargs["parms"][0])
 from cph import cph_parmUtils
-cph_parmUtils.convertToMultiParm(kwargs["parms"][0])
+cph_parmUtils.convertParmStringToMultiParm(kwargs["parms"][0])
 ]]>
                 </scriptCode>
             </scriptItem>
-            <!--First Script Item-->
+<!--First Script Item-->
+            <scriptItem id= "h.openFileinBrowser">
+                <label>Show in File Explorer</label> 
+                <scriptCode>
+<![CDATA[
 
+from cph import cph_parmUtils
+  
+cph_parmUtils.showInBrowser(kwargs["parms"][0])
+]]>
+                </scriptCode>
+            </scriptItem>
+<!--First Script Item-->
+            <scriptItem id= "h.cptd_test1">
+                <label>ToggleDunders</label> 
+                <scriptCode>
+<![CDATA[
+
+
+from cph import cph_parmUtils
+cph_parmUtils.ToggleDunders(kwargs["parms"][0])
+]]>
+                </scriptCode>
+            </scriptItem>
         </subMenu>
     </menu>
 </menuDocument>
