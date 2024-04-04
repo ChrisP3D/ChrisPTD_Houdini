@@ -29,3 +29,11 @@ def updateHipDict(kwargs):
 def test2():
     print('hello')
     
+
+def getHDAbyNode(node):
+    return HDA.node.type().definition()
+
+def getHDAbyFile(file):
+    return hou.hda.definitionsInFile(file)[0]
+
+

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pythonPanelDocument>
+  <!-- This file contains definitions of Python interfaces and the
+ interfaces menu.  It should not be hand-edited when it is being
+ used by the application.  Note, that two definitions of the
+ same interface or of the interfaces menu are not allowed
+ in a single file. -->
+  <interface name="CPH_Tools" label="CPH Tools" icon="MISC_python" showNetworkNavigationBar="false" help_url="">
+    <script><![CDATA[########################################################################
+# Replace the sample code below with your own to create a
+# PyQt5 or PySide2 interface.  Your code must define an
+# onCreateInterface() function that returns the root widget of
+# your interface.
+#
+# The 'hutil.Qt' is for internal-use only.
+# It is a wrapper module that enables the sample code below to work with
+# either a Qt4 or Qt5 environment for backwards-compatibility.
+#
+# When developing your own Python Panel, import directly from PySide2
+# or PyQt5 instead of from 'hutil.Qt'.
+########################################################################
+
+#
+# SAMPLE CODE
+#
+from PySide2 import QtWidgets, QtCore, QtSvg ,QtGui 
+import os
+from cph.python_panels import CPH_Tools 
+
+def onCreateInterface():
+    global cphwidget
+    cphwidget = CPH_Tools.FileBrowserWidget()
+    return cphwidget
+
+
+
+# class FileBrowserWidget(QtWidgets.QWidget):
+#     def __init__(self):
+#         super().__init__()
+#         self.initUI()
+        
+#     def initUI(self):
+#         self.layout = QtWidgets.QVBoxLayout(self)
+        
+#         self.openHDADialogButton = QtWidgets.QPushButton("Select HDAs")
+#         self.openHDADialogButton.clicked.connect(self.openHDAFileDialog)
+        
+        
+#         self.openIconDialogButton = QtWidgets.QPushButton("Select Icon SVG ")
+#         self.openIconDialogButton.clicked.connect(self.openIconFileDialog)
+        
+        
+#         #ICON
+#         self.IconSvg = AspectRatioSvgWidget()
+#         self.svgPath = 'F:/Portfolio/Projects/Glyphs/geo/glyphrnd10.1.svg'
+#         self.icon_pathfield = QtWidgets.QLineEdit()
+#         self.IconSvg.setMaximumSize(200, 200) 
+#         self.IconSvg.load(self.svgPath)
+#         #ICON PATH
+#         self.iconpath = "Path/To/Icon"
+#         self.icon_pathfield.setText(self.iconpath)
+        
+#         #SELECTION LIST
+#         # self.selectionListWidget = QtWidgets.QListWidget()  # This widget will display the selected items
+#         # self.selectionListWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+#         # Use the CustomListWidget instead of QListWidget
+#         self.selectionListWidget = CustomListWidget()
+#         self.selectionListWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+#         self.selectionListWidget.customContextMenuRequested.connect(self.selectionListWidget.showContextMenu)
+#         self.selectionListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+
+        
+#         # Add some sample items to the list widget
+#         self.selectionListWidget.addItems(["Item 1.svg", "Item 2.svg", "Item 3.svg"])
+        
+        
+#         #ADD WIDGETS
+#         self.layout.addWidget(self.openHDADialogButton)
+#         self.layout.addWidget(self.openIconDialogButton)
+#         self.layout.addWidget(self.selectionListWidget)
+#         self.layout.addWidget(self.IconSvg)
+#         self.layout.addWidget(self.icon_pathfield)# Add the list widget to the layout
+
+# #####################
+# #SELECT HDAS
+# #####################
+
+#     def openHDAFileDialog(self):
+#         dialog = QtWidgets.QFileDialog(self)
+#         dialog.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
+#         filters = ['*hda*','*otl*']
+
+#         dialog.setNameFilters(filters)
+#         if dialog.exec_() == QtWidgets.QFileDialog.Accepted:
+#             paths = dialog.selectedFiles()
+
+#             self.processHDASelection(paths)
+    
+
+#     def processHDASelection(self, paths):
+#         if not paths:
+#             return
+        
+#         hdaexts = ['hda','hdalc','hdanc']
+#         goodpaths = []
+#         for path in paths:
+#         #     for file_name in os.listdir(path):
+#         #         file_path = os.path.join(path, file_name)
+#             for ext in hdaexts:
+#                 if path.endswith(f'.{ext}') :
+#                     goodpaths.append(path)
+#         self.updateHDASelectionList(goodpaths)
+        
+#     def updateHDASelectionList(self, paths):
+#         self.selectionListWidget.clear()  # Clear existing items
+#         if not paths:
+#             return
+        
+#         for path in paths:
+#             self.selectionListWidget.addItem(path)
+            
+            
+# #####################
+# #SELECT ICON
+# #####################
+
+
+#     def openIconFileDialog(self):
+#         filter = "SVG Files (*.svg)"
+#         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Select SVG File","",filter)
+#         if fileName:
+#             self.updateIcon(fileName)
+
+#     def updateIcon(self, path):
+#         if not path:
+#             return
+#         self.svgPath = path
+#         self.IconSvg.load(self.svgPath)
+#         self.icon_pathfield.setText(path)
+
+
+
+
+# class AspectRatioSvgWidget(QtSvg.QSvgWidget):
+#     def __init__(self, parent=None):
+#         super(AspectRatioSvgWidget, self).__init__(parent)
+#         self.setPreserveAspectRatio(True)
+
+#     def setPreserveAspectRatio(self, preserve):
+#         self._preserveAspectRatio = preserve
+
+#     def resizeEvent(self, event):
+#         if self._preserveAspectRatio:
+#             size = self.sizeHint()
+#             size.scale(event.size(), QtCore.Qt.KeepAspectRatio)
+#             self.resize(size)
+#         super(AspectRatioSvgWidget, self).resizeEvent(event)
+
+#     def sizeHint(self):
+#         if self.renderer().isValid():
+#             defaultSize = self.renderer().defaultSize()
+#             return defaultSize
+#         return super(AspectRatioSvgWidget, self).sizeHint()
+    
+    
+    
+    
+    
+# class CustomListWidget(QtWidgets.QListWidget):
+#     def __init__(self, parent=None):
+#         super(CustomListWidget, self).__init__(parent)
+#         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+#         self.customContextMenuRequested.connect(self.showContextMenu)
+
+#     def showContextMenu(self, position):
+#         # Get the list item under the cursor
+#         listItem = self.itemAt(position)
+#         if listItem is None:
+#             return
+        
+#         # Create the context menu
+#         contextMenu = QtWidgets.QMenu(self)
+        
+#         # Add "Copy to Clipboard" action
+#         copyAction = contextMenu.addAction("Copy to Clipboard")
+#         copyAction.triggered.connect(lambda: self.copyToClipboard(listItem.text()))
+        
+#         # Add "Load" action
+#         loadAction = contextMenu.addAction("Load")
+#         loadAction.triggered.connect(lambda: self.loadItem(listItem.text()))
+        
+#         # Show the context menu at the cursor's position
+#         contextMenu.exec_(self.viewport().mapToGlobal(position))
+
+#     def copyToClipboard(self, text):
+#         clipboard = QtGui.QGuiApplication.clipboard()
+#         clipboard.setText(text)
+#         print(f"Copied to clipboard: {text}")
+
+#     def loadItem(self, text):
+#         # Placeholder for the load item functionality
+#         # Implement the desired action here
+#         print(f"Loading item: {text}")
+
+
+        
+# # class CustomListWidget(QtWidgets.QListWidget):
+# #     def __init__(self, parent=None):
+# #         super(CustomListWidget, self).__init__(parent)
+# #         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+# #         self.customContextMenuRequested.connect(self.showContextMenu)
+        
+# #         # Set the selection mode to ExtendedSelection
+# #         self.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+]]></script>
+    <includeInToolbarMenu menu_position="420" create_separator="false"/>
+    <help><![CDATA[]]></help>
+  </interface>
+</pythonPanelDocument>

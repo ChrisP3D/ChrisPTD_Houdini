@@ -20,6 +20,8 @@
     <memberTool name="removedunders"/>
     <memberTool name="multiParmRef"/>
     <memberTool name="tool_4"/>
+    <memberTool name="tool_5"/>
+    <memberTool name="tool_7"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
