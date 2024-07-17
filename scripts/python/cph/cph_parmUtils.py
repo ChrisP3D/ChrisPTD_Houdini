@@ -37,10 +37,10 @@ def convertParmStringToMultiParm(parm):
     spliters = ['/','.','#','ch',"chs",'"', "'",')',"(",'strcat',
                 'ch("../")', "ch('../')",'chs("../")', "chs('../')",
                 "#')",'#")',
-                'detail',
-                'point',
-                'vertex',
-                'prim','#']
+                'detail(',
+                'point(',
+                'vertex(',
+                'prim(','#']
     
     nums = [str(i) for i in range(10)]
     spliters += nums
@@ -53,6 +53,46 @@ def convertParmStringToMultiParm(parm):
 
     payload = f"ch(strcat('../{parmval}',detail(-1,'iteration',0)+1))"    
     parm.setExpression(payload)
+
+def convertParmTupleToMultiParm(parmTup,scheme):
+    
+    if scheme == hou.parmNamingScheme.Base1:
+        delimits = ['1','2','3','4']
+    elif scheme == hou.parmNamingScheme.XYZW:
+        delimits = ['x','y','z','w']
+    elif scheme == hou.parmNamingScheme.RGBA:
+        delimits = ['r','g','b','a']
+    elif scheme == hou.parmNamingScheme.UVW:
+        delimits = ['u','v','w']
+    else:
+        delimits = []
+        
+    for i, parm in enumerate(parmTup):
+        parmval = getParmAsString(parm)
+            
+        spliters = ['/','.','#','ch',"chs",'"', "'",')',"(",'strcat',
+                    'ch("../")', "ch('../')",'chs("../")', "chs('../')",
+                    "#')",'#")',
+                    'detail(',
+                    'point(',
+                    'vertex(',
+                    'prim(','#']
+        
+        nums = [str(i) for i in range(10)]
+        spliters += nums
+        for s in spliters:
+            if s in parmval:
+                parmval = parmval.replace(s,"")
+        for dl in delimits:
+            if dl in parmval:
+                parmval = parmval.replace(dl,"")
+        
+        
+        if '#' in parmval:
+            parmval = parmval.replace('#','')
+        
+        payload = f"ch(strcat(strcat('../{parmval}',detail(-1,'iteration',0)+1),{delimits[i]})"    
+        parm.setExpression(payload)
 
 
 def removeDunders(parm,metachars):
@@ -153,7 +193,7 @@ def convertParmStringAndAddInput(parm):
     node = hou.node(nodepath)
     print(node)
 
-    if getNumSpareParams(node) > 0:
+    if len(getSpareParams(node)) > 0:
         spare_input_parm = getFirstSpareInputParm(node)
         if IsEmptyString(spare_input_parm):
             meta_relref = getNearestMetaNodeRelativePath(node)
@@ -175,12 +215,25 @@ def convertParmStringAndAddInput(parm):
 
 # ch(strcat("../bend",detail(-1,"iteration",0)+1))
 def createSpareInputParm(node):
-    inc_name_digit = getNumSpareParams(node)
-    parmtemp = createSpareInputParmTemplate(0)
-    parmtemp.setName("spare_input0")
+    if not len(getSpareInputParams(node)):
+        parmtemp = createSpareInputParmTemplate(0)
+        parmtemp.setName("spare_input0")
+    else:
+        spare_ns = []
+        for spare in getSpareInputParams(node):
+            try:
+                spare_ns.append(int(spare.path()[-1]))
+            except NameError:
+                pass
+        parmtemp = createSpareInputParmTemplate(0)
+        parmtemp.setName(f"spare_input{max(spare_ns)}")
+    #if there is a parm with the name "spare_input0" reasigning the value to the found meta data node
+        
     node.addSpareParmTuple(parmtemp)
     meta_relref = getNearestMetaNodeRelativePath(node)
-    node.parm(parmtemp.name()).set(meta_relref)
+    
+    if meta_relref:
+        node.parm(parmtemp.name()).set(meta_relref)
     
 def createSpareInputParmTemplate(digit):
     tags = { "cook_depend":"1",
@@ -195,16 +248,16 @@ def createSpareInputParmTemplate(digit):
     )
     return sptmp
 
-def getNumSpareParams(node):
-    nspares = 0
+def getSpareInputParams(node):
+    nspare_ins = []
     for p in node.parms():
         if p.isSpare():
             temp = p.parmTemplate()
             tags = list(temp.tags().keys())
             if 'cook_dependent' and 'opfilter' and 'oprelative' in tags:
-                nspares += 1
+                nspare_ins.append(p)
                 
-    return nspares
+    return nspare_ins
 
 def getFirstSpareInputParm(node):
     for p in node.parms():
@@ -215,6 +268,11 @@ def getFirstSpareInputParm(node):
                 return p
 
 
+def isSpare(parm):
+    temp = parm.parmTemplate()
+    tags = list(temp.tags().keys())
+    if 'cook_dependent' and 'opfilter' and 'oprelative' in tags:
+        return True
 
 def IsEmptyString(parm):
     if parm.evalAsString() == '':
@@ -230,8 +288,17 @@ def getNodeRefFromParm(parm):
     return hou.node(nodepath)
 
 def getNearestMetaNodeRelativePath(node):
+
+    if isinstance(node,list) or isinstance(node,tuple):
+        selected_positions=[]
+        for n in node:
+            selected_positions.append(n.position())
+    else:
+        selected_positions = [node.position()]
+    
+    selected_positions = [node.position()]
     metanodes = []
-    min_dists = []
+    mn_dict = {}
     for n in node.parent().children():
         if n.type() == hou.sopNodeTypeCategory().nodeType('block_begin'):
             if n.parm('method').eval() == 2:  # Metadata setting
@@ -305,4 +372,18 @@ def hasTag(_parm,tag)->bool:
 
 def isEditor(_parm)->bool:
     return hasTag(_parm,'editor')
+
+def isGroup(_parm):
+    if 'group' in _parm.name():
+        return True
+    
+def convertAllParmsToMP(node):
+    parms = node.parms()
+    for parm in parms:
+        if isParmExpression(parm):
+            convertParmStringToMultiParm(parm)
+    if not getNumSpareParams(node):
+        createSpareInputParm(node)
         
+    
+    

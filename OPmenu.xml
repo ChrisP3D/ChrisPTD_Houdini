@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menuDocument>
+    <menu>
+    <subMenu id="CP3D">
+            <label>CP3D</label>
+
+
+<!--First Script Item-->
+
+            <scriptItem id= "h.SendCopPreviewToMTLXShader">
+                <label>SendCopPreviewToMTLXShader</label> 
+                <scriptCode>
+<![CDATA[
+
+from cph import CopsToMtlx
+CopsToMtlx.ConvertCopPreviewToMTLX(kwargs['node'],invoked_from='menu')
+]]>
+                </scriptCode>
+            </scriptItem>
+
+
+    </subMenu>
+    </menu>
+</menuDocument>

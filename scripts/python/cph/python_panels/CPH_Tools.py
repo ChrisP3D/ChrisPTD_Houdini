@@ -63,7 +63,7 @@ class FileBrowserWidget(QtWidgets.QWidget):
         self.selectionListWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.selectionListWidget.customContextMenuRequested.connect(self.selectionListWidget.showContextMenu)
         self.selectionListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)   
-
+        
         #ADD WIDGETS
         self.layout.addWidget(self.openHDADialogButton)
         self.layout.addWidget(self.openIconDialogButton)

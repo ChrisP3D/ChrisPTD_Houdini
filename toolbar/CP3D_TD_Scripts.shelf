@@ -22,6 +22,15 @@
     <memberTool name="tool_4"/>
     <memberTool name="tool_5"/>
     <memberTool name="tool_7"/>
+    <memberTool name="tool_8"/>
+    <memberTool name="ConvertAllParms"/>
+    <memberTool name="remove expressions"/>
+    <memberTool name="tool_9"/>
+    <memberTool name="prepend parm name string"/>
+    <memberTool name="tool_10"/>
+    <memberTool name="tool_11"/>
+    <memberTool name="MultiNodeConvertToMultiparm"/>
+    <memberTool name="mergeMultipleHips"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">

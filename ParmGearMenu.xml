@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<menuDocument>
+    <menu>
+            <scriptItem id="delete_all_expressions">
+                <label>Delete All Expressions</label>
+                <scriptCode><![CDATA[
+for parm in kwargs['node'].parms():
+    if len(parm.keyframes()) > 0:
+        parm.deleteAllKeyframes()
+        try:
+            value = parm.parmTemplate().defaultValue()[0]
+        except TypeError:
+            value = parm.parmTemplate().defaultValue()
+        parm.set(value)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+
+    </menu>
+</menuDocument>
+
+
+

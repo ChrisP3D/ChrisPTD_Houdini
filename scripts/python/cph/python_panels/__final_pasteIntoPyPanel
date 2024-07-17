@@ -1,0 +1,8 @@
+from PySide2 import QtWidgets, QtCore, QtSvg ,QtGui 
+import os
+from cph.python_panels import CPH_Tools 
+
+def onCreateInterface():
+    global cphwidget
+    cphwidget = CPH_Tools.FileBrowserWidget()
+    return cphwidget
