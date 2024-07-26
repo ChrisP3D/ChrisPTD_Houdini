@@ -368,3 +368,73 @@ def convert_file_caches_to_labs(kwargs):
 
         
         new_labs_filecaches.append(labs_fc)
+
+def getAveragePositionOfMultipleNodes(nodes):
+    total_x = 0.0
+    total_y = 0.0
+    for node in nodes:
+        pos = node.position()
+        total_x += pos[0]
+        total_y += pos[1]
+    if len(nodes) > 0:
+        avg_x = total_x / num_nodes
+        avg_y = total_y / num_nodes
+        return hou.Vector2(avg_x, avg_y)
+    
+def createKarmaMatBuilder(destination_path):
+    """Taken from user: CrisDoesCG at https://www.sidefx.com/forum/topic/95981/?page=1#post-422156
+    Appended the functionality to add default nodes inside the network"""
+    
+    INHERIT_PARM_EXPRESSION = '''n = hou.pwd()
+n_hasFlag = n.isMaterialFlagSet()
+i = n.evalParm('inherit_ctrl')
+r = 'none'
+if i == 1 or (n_hasFlag and i == 2):
+    r = 'inherit'
+return r'''
+    destination_node = hou.node(destination_path)
+ 
+    subnetNode = destination_node.createNode("subnet","karmamaterial")
+    subnetNode.moveToGoodPosition()
+    subnetNode.setMaterialFlag(True)                  
+    
+    parameters = subnetNode.parmTemplateGroup()
+
+    newParm_hidingFolder = hou.FolderParmTemplate("mtlxBuilder","MaterialX Builder",folder_type=hou.folderType.Collapsible)
+    control_parm_pt = hou.IntParmTemplate('inherit_ctrl','Inherit from Class', 
+                        num_components=1, default_value=(2,), 
+                        menu_items=(['0','1','2']),
+                        menu_labels=(['Never','Always','Material Flag']))
+
+    newParam_tabMenu = hou.StringParmTemplate("tabmenumask", "Tab Menu Mask", 1, default_value=["MaterialX parameter constant collect null genericshader subnet subnetconnector suboutput subinput"])
+    class_path_pt = hou.properties.parmTemplate('vopui', 'shader_referencetype')
+    class_path_pt.setLabel('Class Arc')
+    class_path_pt.setDefaultExpressionLanguage((hou.scriptLanguage.Python,))
+    class_path_pt.setDefaultExpression((INHERIT_PARM_EXPRESSION,))   
+
+    ref_type_pt = hou.properties.parmTemplate('vopui', 'shader_baseprimpath')
+    ref_type_pt.setDefaultValue(['/__class_mtl__/`$OS`'])
+    ref_type_pt.setLabel('Class Prim Path')               
+
+    newParm_hidingFolder.addParmTemplate(newParam_tabMenu)
+    newParm_hidingFolder.addParmTemplate(control_parm_pt)  
+    newParm_hidingFolder.addParmTemplate(class_path_pt)    
+    newParm_hidingFolder.addParmTemplate(ref_type_pt)             
+
+    parameters.append(newParm_hidingFolder)
+    subnetNode.setParmTemplateGroup(parameters)
+    
+    props = subnetNode.createNode('kma_material_properties')
+    surf = subnetNode.createNode('mtlxstandard_surface')
+    disp = subnetNode.createNode('mtlxdisplacement')
+    
+    output = subnetNode.node('suboutput1')
+    
+    output.setInput(0, surf, 0)
+    output.setInput(1, props, 0)
+    output.setInput(2, disp, 0)
+
+    for node in subnetNode.children():
+        node.moveToGoodPosition()
+    
+    return subnetNode

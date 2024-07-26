@@ -1,24 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menuDocument>
     <menu>
-    <subMenu id="CP3D">
+        <subMenu id="CP3D">
             <label>CP3D</label>
 
 
-<!--First Script Item-->
+<!--CopsToMtlx-->
 
-            <scriptItem id= "h.SendCopPreviewToMTLXShader">
-                <label>SendCopPreviewToMTLXShader</label> 
-                <scriptCode>
+                <scriptItem id= "h.SendCopPreviewToMTLXShader">
+                    <label>SendCopPreviewToMTLXShader</label> 
+                    <scriptCode>
 <![CDATA[
 
 from cph import CopsToMtlx
-CopsToMtlx.ConvertCopPreviewToMTLX(kwargs['node'],invoked_from='menu')
+node = kwargs['node']
+CopsToMtlx.convertCopPreviewToMTLX(node)
 ]]>
-                </scriptCode>
-            </scriptItem>
+                    </scriptCode>
+                </scriptItem>
 
+                <scriptItem id="h.RecreateMTLXNetwork">
+                    <label>Recreate MTLX Network</label>
+                    <scriptCode>
+<![CDATA[
+from cph import CopsToMtlx
+node = kwargs['node']
+CopsToMtlx.recreate_mtlx_network(node)
+]]>
+                    </scriptCode>
+                </scriptItem>
 
-    </subMenu>
+                <scriptItem id="h.ManualUpdateMTLX">
+                    <label>Manual Update MTLX</label>
+                    <scriptCode>
+<![CDATA[
+from cph import CopsToMtlx
+node = kwargs['node']
+CopsToMtlx.manual_update_mtlx(node)
+]]>
+                    </scriptCode>
+                </scriptItem>
+<!--Test-->
+
+                <scriptItem id= "h.RemoveAllCallbacks">
+                    <label>Remove All Callbacks</label> 
+                    <scriptCode>
+<![CDATA[
+kwargs['node'].removeAllEventCallbacks()
+]]>
+                    </scriptCode>
+                </scriptItem>
+
+        </subMenu>
     </menu>
 </menuDocument>
