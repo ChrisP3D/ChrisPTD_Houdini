@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mainMenu>
+  <menuBar>
+    <subMenu id="file_menu">
+    <separatorItem id="file_menu_sep_3"/>
+            <scriptItem id="h.merge_hips_from_directories">
+                <label>Merge Hips From Directories</label>
+                <scriptCode>
+<![CDATA[
+from cph.hipUtils import merge_hips
+
+merge_hips.merge_hip_folders()
+]]>
+                </scriptCode>
+            </scriptItem>
+    </subMenu>
+  </menuBar>
+</mainMenu>

@@ -12,7 +12,7 @@ root {
                 pane panetab14 -a 0 -l 10 -H /obj/ -T OBJ -m treecontrol
             }
             split 0.222222 V {
-                split 0.321131 H {
+                split 0.425556 H {
                     tabs 0 1 {
                         pane panetab11 -a 0 -l 10 -H /obj/ -T OBJ -m details
                         pane panetab8 -a 1 -l 10 -H /obj/ -T OBJ -m pythonpanel
@@ -31,7 +31,7 @@ root {
             }
         }
         split 0.449037 V {
-            split 0.498014 H {
+            split 0.649602 H {
                 tabs 0 1 {
                     pane panetab5 -a 0 -l 1 -H /obj/ -T OBJ -m parmeditor
                 }
@@ -57,12 +57,19 @@ scenegraphtree -S 0.25 -m 2 -p "/collections /lights" -c  -i  -o  -x 1 -s 1 -M 0
 pythonpanel -s on -t off -n PackageBrowser panetab8
 pythonpanel -s on -t off -n CPH_Tools panetab9
 pythonpanel -s on -t on -n CPH_Tools panetab12
+viewerstow -x open -b stow -l stow -m hide -c hide -d open ${DESKNAME}.panetab13.world
+vieweroption -a 2 ${DESKNAME}.panetab13.world
+viewlayout -s 2 ${DESKNAME}.panetab13.world
+viewtype -t ortho_right ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",4)`
+viewtype -t ortho_front ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",3)`
+viewtype -t ortho_top ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",1)`
+viewtype -t perspective ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",2)`
 geospreadsheet -c 0 -l horizontal -s 0.5 -m none -f 0 panetab3
 scenegraphtree -S 0.25 -m 2 -p "/collections /lights" -c  -i  -o  -x 1 -s 1 -M 0 -C primtype,descendants,kind,populated,loaded,activation,visibility,solo,selectability  panetab3
 chopview -a 0 -c "" -k 1 -m 1 -b 1 -e 1 -f 0 -g 0 -H 1 -i 0 -j 1 -l 0 -n 1 -V 0 -y 0 -B 0 -s 0 -S 0.034375 -u 0 -v 0 -h -10 310 -r -1.5 1.5 panetab2
 parmeditor -T 0.25 -w 0 panetab5
 parmeditor -T 0.25 -w 0 panetab6
-networkeditor -p '{\n	"palettecolors":"",\n	"showspareinputdep":"1",\n	"showchilddep":"1",\n	"showdep":"0",\n	"taskgraphsortdirection":"0",\n	"showtaskgraphperf":"0",\n	"taskgraphperfstatname":"Cook Time",\n	"perfstatname":"Time",\n	"showparmdialogmax":"1",\n	"taskgraphcollapsemode":"Off",\n	"workitemcolorattribute":"",\n	"gridmode":"0",\n	"workitemattrtocollapseby":"",\n	"overviewbounds":"0.000000 0.000000 304.200000 202.500000",\n	"overviewmode":"2",\n	"showmenu":"1",\n	"showperfstats":"1",\n	"grouplistsplit":"0.75",\n	"showgrouplist":"0",\n	"palettemode":"0",\n	"useworkitemcolorattribute":"0",\n	"showtasksmenu":"1",\n	"backgroundimageediting":"0",\n	"backgroundimagebrightness":"1.0",\n	"gridystep":"1.0",\n	"showtree":"0",\n	"palettesize":"187 187",\n	"treesplit":"0.25",\n	"typesidebarsplit":"0.25",\n	"showtypesidebar":"0",\n	"taskgraphsortcriteria":"Automatic",\n	"showparmdialog":"0",\n	"gridxstep":"2.0"\n}\n' panetab10
+networkeditor -p '{\n	"showcopsmenu":"1",\n	"palettecolors":"",\n	"showspareinputdep":"1",\n	"showchilddep":"1",\n	"showdep":"0",\n	"taskgraphsortdirection":"0",\n	"showtaskgraphperf":"0",\n	"taskgraphperfstatname":"Cook Time",\n	"perfstatname":"Time",\n	"showparmdialogmax":"1",\n	"taskgraphcollapsemode":"Off",\n	"workitemcolorattribute":"",\n	"gridmode":"0",\n	"workitemattrtocollapseby":"",\n	"overviewbounds":"0.000000 0.000000 301.800000 180.600000",\n	"overviewmode":"2",\n	"showmenu":"1",\n	"showperfstats":"1",\n	"grouplistsplit":"0.75",\n	"showgrouplist":"0",\n	"palettemode":"0",\n	"useworkitemcolorattribute":"0",\n	"showtasksmenu":"1",\n	"backgroundimageediting":"0",\n	"backgroundimagebrightness":"1.0",\n	"gridystep":"1.0",\n	"showtree":"0",\n	"palettesize":"187 187",\n	"treesplit":"0.25",\n	"typesidebarsplit":"0.25",\n	"showtypesidebar":"0",\n	"taskgraphsortcriteria":"Automatic",\n	"showparmdialog":"0",\n	"gridxstep":"2.0"\n}\n' panetab10
 netcolumns -c display,xray,select,origin,capture,bone -n OBJ panetab10
 netcolumns -c display,render,template,selectabletemplate,highlight,unload,bypass,lock -n SOP panetab10
 netcolumns -c delscript,comment -n CHOPNET panetab10
@@ -80,7 +87,7 @@ netcolumns -c display,bypass,delscript,comment,input -n LOP panetab10
 netcolumns -c delscript,comment -n MGR panetab10
 netcolumns -c delscript,comment -n DIR panetab10
 netcolumns -c delscript,comment -n DATA panetab10
-networkeditor -p '{\n	"palettecolors":"",\n	"showspareinputdep":"1",\n	"showchilddep":"1",\n	"showdep":"0",\n	"taskgraphsortdirection":"0",\n	"showtaskgraphperf":"0",\n	"taskgraphperfstatname":"Cook Time",\n	"perfstatname":"Time",\n	"showparmdialogmax":"1",\n	"taskgraphcollapsemode":"Off",\n	"workitemcolorattribute":"",\n	"gridmode":"0",\n	"workitemattrtocollapseby":"",\n	"overviewbounds":"0.000000 0.000000 300.900000 202.500000",\n	"overviewmode":"2",\n	"showmenu":"1",\n	"showperfstats":"1",\n	"grouplistsplit":"0.75",\n	"showgrouplist":"0",\n	"palettemode":"0",\n	"useworkitemcolorattribute":"0",\n	"showtasksmenu":"1",\n	"backgroundimageediting":"0",\n	"backgroundimagebrightness":"1.0",\n	"gridystep":"1.0",\n	"showtree":"0",\n	"palettesize":"187 187",\n	"treesplit":"0.25",\n	"typesidebarsplit":"0.25",\n	"showtypesidebar":"0",\n	"taskgraphsortcriteria":"Automatic",\n	"showparmdialog":"0",\n	"gridxstep":"2.0"\n}\n' panetab7
+networkeditor -p '{\n	"showcopsmenu":"1",\n	"palettecolors":"",\n	"showspareinputdep":"1",\n	"showchilddep":"1",\n	"showdep":"0",\n	"taskgraphsortdirection":"0",\n	"showtaskgraphperf":"0",\n	"taskgraphperfstatname":"Cook Time",\n	"perfstatname":"Time",\n	"showparmdialogmax":"1",\n	"taskgraphcollapsemode":"Off",\n	"workitemcolorattribute":"",\n	"gridmode":"0",\n	"workitemattrtocollapseby":"",\n	"overviewbounds":"0.000000 0.000000 297.600000 180.600000",\n	"overviewmode":"2",\n	"showmenu":"1",\n	"showperfstats":"1",\n	"grouplistsplit":"0.75",\n	"showgrouplist":"0",\n	"palettemode":"0",\n	"useworkitemcolorattribute":"0",\n	"showtasksmenu":"1",\n	"backgroundimageediting":"0",\n	"backgroundimagebrightness":"1.0",\n	"gridystep":"1.0",\n	"showtree":"0",\n	"palettesize":"187 187",\n	"treesplit":"0.25",\n	"typesidebarsplit":"0.25",\n	"showtypesidebar":"0",\n	"taskgraphsortcriteria":"Automatic",\n	"showparmdialog":"0",\n	"gridxstep":"2.0"\n}\n' panetab7
 netcolumns -c display,xray,select,origin,capture,bone -n OBJ panetab7
 netcolumns -c display,render,template,selectabletemplate,highlight,unload,bypass,lock -n SOP panetab7
 netcolumns -c delscript,comment -n CHOPNET panetab7
@@ -98,10 +105,3 @@ netcolumns -c display,bypass,delscript,comment,input -n LOP panetab7
 netcolumns -c delscript,comment -n MGR panetab7
 netcolumns -c delscript,comment -n DIR panetab7
 netcolumns -c delscript,comment -n DATA panetab7
-viewerstow -x open -b stow -l stow -m hide -c hide -d open ${DESKNAME}.panetab13.world
-vieweroption -a 2 ${DESKNAME}.panetab13.world
-viewlayout -s 2 ${DESKNAME}.panetab13.world
-viewtype -t ortho_right ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",4)`
-viewtype -t ortho_front ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",3)`
-viewtype -t ortho_top ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",1)`
-viewtype -t perspective ${DESKNAME}.panetab13.world.`vpname("${DESKNAME}.panetab13.world",2)`

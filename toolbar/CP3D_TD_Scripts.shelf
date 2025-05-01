@@ -31,6 +31,7 @@
     <memberTool name="tool_11"/>
     <memberTool name="MultiNodeConvertToMultiparm"/>
     <memberTool name="mergeMultipleHips"/>
+    <memberTool name="megascan_Mat"/>
   </toolshelf>
 
   <toolshelf name="vellumSetups" label="Vellum Setups">
