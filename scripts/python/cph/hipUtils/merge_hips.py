@@ -27,34 +27,35 @@ def find_hip_files(folder_paths):
     
     return hip_files
 
-def merge_hip_folders():
+def merge_hip_folders(folder_paths = None):
     #User selects directories
-    selected_dirs = hou.ui.selectFile(
-        file_type=hou.fileType.Directory,
-        title="Select directories containing hip files",
-        multiple_select=True
-    )
+    if folder_paths is None:
+        folder_paths = hou.ui.selectFile(
+            file_type=hou.fileType.Directory,
+            title="Select directories containing hip files",
+            multiple_select=True
+        )
 
-
-    if selected_dirs:
+    if folder_paths:
+        # If the user selects multiple directories, split them into a list
         
-        folder_paths = selected_dirs.split(';')
+        folder_paths = folder_paths.split(';')
 
         hip_files = find_hip_files(folder_paths)
 
         merged = []
         failed = []
         other = []
-        #Merge Operation
         
+        #Merge
         for hip_file in hip_files:
             try:
-                print(f"Merging file: {hip_file}")
+                hou.ui.setStatusMessage(f"Merging file: {hip_file}")
                 hou.hipFile.merge(hip_file)
                 merged.append(hip_file)
                 
             except Exception as e:
-                print(f"Failed to merge file {hip_file}: {e}")
+                hou.ui.setStatusMessage(f"Failed to merge file {hip_file}: {e}")
                 failed.append(hip_file)
                 
 
@@ -68,15 +69,15 @@ def merge_hip_folders():
         other_str = "\n  ".join(other) if other else "None"
 
         # Display the message with formatted information
-        hou.ui.displayMessage(f"""Successfully merged {len(merged)} files.
-    Failed to merge {len(failed)} files.
-    Succeeded:
-    {merged_str}
-    Failed:
-    {failed_str}
-    Other:
-    {other_str}
-    """)
+        hou.ui.setStatusMessage(f"""Successfully merged {len(merged)} files.
+            Failed to merge {len(failed)} files.
+            Succeeded:
+            {merged_str}
+            Failed:
+            {failed_str}
+            Other:
+            {other_str}
+            """)
     
     else:
         hou.ui.displayMessage("No directories selected.")
