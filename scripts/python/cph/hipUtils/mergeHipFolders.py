@@ -2,6 +2,9 @@ import os
 import hou
 
 
+#current_hip_path = hou.hipFile.path()
+#hou.hipFile.merge(current_hip_path)
+
 hip_extensions = (".hip", ".hiplc", ".hipnc", ".hipsc")
 
 def extract_hip_name(file_path):
@@ -81,3 +84,6 @@ def merge_hip_folders(folder_paths = None):
     
     else:
         hou.ui.displayMessage("No directories selected.")
+
+
+

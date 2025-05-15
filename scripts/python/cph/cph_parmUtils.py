@@ -29,7 +29,6 @@ def Dunderize(method='None'):
                         
                         methoddict[method](parm,metachars)
             
-
 def convertParmStringToMultiParm(parm):
 
     parmval = getParmAsString(parm)
@@ -93,7 +92,6 @@ def convertParmTupleToMultiParm(parmTup,scheme):
         
         payload = f"ch(strcat(strcat('../{parmval}',detail(-1,'iteration',0)+1),{delimits[i]})"    
         parm.setExpression(payload)
-
 
 def removeDunders(parm,metachars):
     pstr = getParmAsString(parm)
@@ -181,12 +179,6 @@ def ToggleDunders(parm):
     # # elif "@" in parmstring:
     # #     payload = parmstring.replace('@',"@__")
 
-        
-
-
-        
-
-
 def convertParmStringAndAddInput(parm):
     print(f"Parm is type{type(parm)} of value {parm}")
     nodepath = getNodepathFromParm(parm)
@@ -213,7 +205,7 @@ def convertParmStringAndAddInput(parm):
     payload = f"ch(strcat('../{name}',detail(-1,'iteration',0)+1))"    
     parm.setExpression(payload)
 
-# ch(strcat("../bend",detail(-1,"iteration",0)+1))
+
 def createSpareInputParm(node):
     if not len(getSpareInputParams(node)):
         parmtemp = createSpareInputParmTemplate(0)
@@ -321,25 +313,20 @@ def getSelectedParm():
         if parm.isShowingExpression():
             return parm
     
-def isParmExpression(parm):
-    if len(parm.keyframes()) >0:
-        return True
-    else:
-        return False
+def isParmExpression(parm)->bool:
+    return len(parm.keyframes()) >0
     
 def getParmAsString(parm):
-    
     if isParmExpression(parm):
         return str(parm.expression())
-
     else:
         return parm.evalAsString()
     
-def forceSetParm(_parm,_payload):
-        if isParmExpression(_parm):
-            _parm.setExpression(_payload)
+def forceSetParm(parm,_payload):
+        if isParmExpression(parm):
+            parm.setExpression(_payload)
         else:
-            _parm.set(_payload)
+            parm.set(_payload)
 
 def injectString(string, key_char, injection):
     payload = ''
@@ -356,25 +343,25 @@ def injectString(string, key_char, injection):
 def getParmType(_parm):
     return _parm.parmTemplate().type()
 
-def IsInt(_parm)->bool:
-    return _parm.parmTemplate().type() == hou.parmTemplateType.Int
-def IsFloat(_parm)->bool:
-    return _parm.parmTemplate().type() == hou.parmTemplateType.Int
-def IsString(_parm)->bool:
-    return _parm.parmTemplate().type() == hou.parmTemplateType.String
-def IsStringRegular(_parm)->bool:
-    return _parm.parmTemplate().stringType() == hou.stringParmType.Regular
-def isStringFileReference(_parm)->bool:
-    return _parm.parmTemplate().stringType() == hou.stringParmType.FileReference
+def IsInt(parm)->bool:
+    return parm.parmTemplate().type() == hou.parmTemplateType.Int
+def IsFloat(parm)->bool:
+    return parm.parmTemplate().type() == hou.parmTemplateType.Int
+def IsString(parm)->bool:
+    return parm.parmTemplate().type() == hou.parmTemplateType.String
+def IsStringRegular(parm)->bool:
+    return parm.parmTemplate().stringType() == hou.stringParmType.Regular
+def isStringFileReference(parm)->bool:
+    return parm.parmTemplate().stringType() == hou.stringParmType.FileReference
 
-def hasTag(_parm,tag)->bool:
-    return str(tag) in list(_parm.parmTemplate().tags().keys())
+def hasTag(parm,tag)->bool:
+    return str(tag) in list(parm.parmTemplate().tags().keys())
 
-def isEditor(_parm)->bool:
-    return hasTag(_parm,'editor')
+def isEditor(parm)->bool:
+    return hasTag(parm,'editor')
 
-def isGroup(_parm):
-    if 'group' in _parm.name():
+def isGroup(parm):
+    if 'group' in parm.name():
         return True
     
 def convertAllParmsToMP(node):

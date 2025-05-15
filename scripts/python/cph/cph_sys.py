@@ -15,7 +15,6 @@ def check_or_create_dir(directory_name):
         os.makedirs(directory_name)
         print(f"Directory '{directory_name}' created.")	
     else:
-        #print('dir exists')
         return
 
 def getScriptsFolder():
