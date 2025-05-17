@@ -144,43 +144,10 @@ def ToggleDunders(parm):
             
         payload = "".join(parmstring)
         forceSetParm(parm,payload)        
-        #     for split in splitstring:
-        #         if mc in splitstring:
-        #             split = list(split)
-        #             split.insert(split.index(mc)+1, "__")
-                    
-        #             split = "".join(lpt)
-        # forceSetParm(parm,payload)
-                # if f"{mc}__" in parmstring or f"__{mc}" in parmstring:
-                #     parmstring.replace(f"{mc}__", mc)
-                #     parmstring.replace(f"__{mc}", mc)
-
-    #             else:
-    #                 payload = injectString(parmstring, mc, "__")
-    #                 forceSetParm(parm,payload)
-    #     else:
-    #         for str in splitstring:
-    #             str = f'__{str}'
-    #         payload = " ".join(splitstring)
-    #         forceSetParm(parm,payload)
-    
-    # else:
-    #     for str in splitstring:
-    #         str = f'__{str}'
-    #     payload = " ".join(splitstring)
-    #     forceSetParm(parm,payload)
-        
-        
-    #_______________________
-    # elif "@__" in parmstring:
-    #     payload = parmstring.replace('@__',"@")
-    #     forceSetParm(parm,payload)
-        
-    # # elif "@" in parmstring:
-    # #     payload = parmstring.replace('@',"@__")
 
 def convertParmStringAndAddInput(parm):
-    print(f"Parm is type{type(parm)} of value {parm}")
+    """Convert a parameter string to a multi-parm and add an input parameter."""
+    
     nodepath = getNodepathFromParm(parm)
     node = hou.node(nodepath)
     print(node)
@@ -207,27 +174,35 @@ def convertParmStringAndAddInput(parm):
 
 
 def createSpareInputParm(node):
+    """Create a spare input parameter on the given node."""
+    # Check if the node already has a spare input parameter
+    # If not, create a new one
     if not len(getSpareInputParams(node)):
         parmtemp = createSpareInputParmTemplate(0)
         parmtemp.setName("spare_input0")
     else:
+        # If there are spare input parameters, find the highest number
+        # and create a new one with the next number
         spare_ns = []
         for spare in getSpareInputParams(node):
             try:
                 spare_ns.append(int(spare.path()[-1]))
             except NameError:
                 pass
+        #
         parmtemp = createSpareInputParmTemplate(0)
         parmtemp.setName(f"spare_input{max(spare_ns)}")
     #if there is a parm with the name "spare_input0" reasigning the value to the found meta data node
-        
+
     node.addSpareParmTuple(parmtemp)
+    
     meta_relref = getNearestMetaNodeRelativePath(node)
     
     if meta_relref:
         node.parm(parmtemp.name()).set(meta_relref)
     
 def createSpareInputParmTemplate(digit):
+    """Create a spare input parameter template."""
     tags = { "cook_depend":"1",
             "opfilter" : "!!SOP!!",
             "oprelative" : "."}
@@ -267,20 +242,27 @@ def isSpare(parm):
         return True
 
 def IsEmptyString(parm):
-    if parm.evalAsString() == '':
-        return True
+    return parm.evalAsString() == ''
+
 
 def getNodepathFromParm(parm):
-    nodepath = parm.path().split(parm.name())[0]
-    return nodepath
+    return parm.path().split(parm.name())[0]
 
 def getNodeRefFromParm(parm):
-    nodepath = parm.path().split(parm.name())[0]
+    return hou.node(parm.path().split(parm.name())[0])
     
-    return hou.node(nodepath)
+ 
 
 def getNearestMetaNodeRelativePath(node):
+    """Get the relative path to the nearest metadata node.
+        Args:
+            node (hou.Node): The node from which to find the nearest metadata node.
+        Returns:
+            str: The relative path to the nearest metadata node, or None if not found.
+    """
+    # Get the selected node's position
 
+    # Check if the node is a list or tuple
     if isinstance(node,list) or isinstance(node,tuple):
         selected_positions=[]
         for n in node:
@@ -372,5 +354,7 @@ def convertAllParmsToMP(node):
     if not getNumSpareParams(node):
         createSpareInputParm(node)
         
-    
+def swapString(self,string, swapout, swapin):
+        string = list(string)
+        string.insert(string.index(swapout)+1,swapin)
     

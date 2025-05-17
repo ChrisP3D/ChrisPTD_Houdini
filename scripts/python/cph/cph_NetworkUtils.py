@@ -61,7 +61,7 @@ def SelectedSopsToStage():
         
         if i <1:
             if len(sopimports) >0:
-                connect_first = max(sopimports, key=cph_Utils.get_digits)
+                connect_first = max(sopimports, key=cph_Utils.getNodeDigits)
                 new_sopimport.setInput(0,connect_first,0)
                 new_sopimport.moveToGoodPosition()
                 new_sopimport.setDisplayFlag(1)
@@ -80,80 +80,19 @@ def updateNodesInNetwork(network,node_type,target_type):
     for node in network.allSubChildren():
         if node.type() == node_type:
             node.changeNodeType(target_type)
-def updateNodesInProject()
 
-    hou.sopNodeTypeCategory().nodeType('filecache::2.0') 
-    hou.sopNodeTypeCategory().nodeType('labs::filecache::2.0')
+#updateNodesInNetwork(hou.node('/obj/geo1'),
+#                           hou.sopNodeTypeCategory().nodeType('filecache::2.0') ,
+#                           hou.sopNodeTypeCategory().nodeType('labs::filecache::2.0')):
 
 
-class NetworkTreeUtil():
-    #hou.parm.unexpandedString()
-    def __init__(self):
-        self.file_cache_type = hou.sopNodeTypeCategory().nodeType('filecache::2.0') 
-        self.labs_fc_type = hou.sopNodeTypeCategory().nodeType('labs::filecache::2.0')   
-        
-        self.storage = '$DCB'
-        self.fasthdd = '$DCA'
-        
-        
-        self.fcnodes = []
-        self.fcbaseFolderParms = []
-        
-    def getAllFileCachesInProject(self,fc_type = 'all'):
-        """_summary_
+def getAllNodesOfType(network,type):
+    """Returns all nodes of a given type in a network"""
+    found = []
+    for node in network.AllSubChildren():
+        if node.type() == type or node.type():
+            found.append(node)
 
-        Args:
-            fc_type (str, optional): Defaults to 'all'. 'labs' retrieves only labs file cache, 'sidefx' retrieves sidefx file cache nodes
-        """
-        for child in hou.node('/').allSubChildren():
-            if fc_type == 'all':
-                if child.type() == self.file_cache_type or child.type() == self.labs_fc_type:
-                    self.fcnodes.append(child)
-            elif fc_type == 'labs':
-                if child.type() == self.labs_fc_type:
-                    self.fcnodes.append(child)
-            elif fc_type == 'sidefx':
-                if child.type() == self.file_cache_type:  
-                    self.fcnodes.append(child)   
-                    
-                    
-    def getAllNodesInProject(self,node_type):
-        #get all file caches
-        nodes = []
-        for child in hou.node('/').allSubChildren():
-            if child.type() == node_type:
-                nodes.append(child)
-        return nodes
-                
-    def getAllFileCacheBaseDirParms(self):
-        for fc in self.fcnodes:
-            self.fcbaseFolderParms.append(fc.parm('basedir'))
-    
-    def isExplicit(self,fcnode):
-        return fcnode.parm('filemethod')      
-      
-    def forceFileConstructed(self,fcnode):
-        if self.isExplict(fcnode):
-            fcnode.parm('filemethod').set(0)
-            
-    def setBaseDirToStorage(self,fcnode):
-        self.forceFileConstructed(fcnode)
-        base_str = fcnode.parm('basedir').unexpandedString()
-        self.swapString(base_str,self.fasthdd,self.storage)
-        
-        # def setBaseDirToFastHDD(self):
-        #     self.forceFileConstructed(fcnode)
-        #     base_str = fcnode.parm('basedir').unexpandedString()
-        #     self.swapString(base_str,self.storage,self.fasthdd)
-        #     #TODO
-        #     #check dir, use os module to transfer file cache files to new folder
-        
-        folderpath = fcnode.parm('basedir').evalAsString()
-        
-    #TODO move to utils
-    def swapString(self,string, swapout, swapin):
-            string = list(string)
-            string.insert(string.index(swapout)+1,swapin)
     
     #TODO
     # def setAllBaseDirsToStorage(self):

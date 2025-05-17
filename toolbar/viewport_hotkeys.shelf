@@ -16,4 +16,62 @@
     <memberTool name="turn_off_all_visualizers"/>
     <memberTool name="tool_13"/>
   </toolshelf>
+
+  <tool name="tgl_point_markers" label="Toggle Point Markers" icon="hicon:/SVGIcons.index?BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+
+scene_geo.showPointMarkers(not scene_geo.isShowingPointMarkers())]]></script>
+  </tool>
+
+  <tool name="tgl_point_normals" label="Toggle Point Normals" icon="BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+vert_normals = scene_geo.isShowingVertexNormals()
+point_normals = scene_geo.isShowingPointNormals()
+
+for norm in (vert_normals, point_normals):
+    scene_geo.showPointNormals(not norm)
+    scene_geo.showVertexNormals(not norm)]]></script>
+  </tool>
+
+  <tool name="tgl_show_trails" label="Toggle Point Trails" icon="BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+
+scene_geo.showPointTrails(not scene_geo.isShowingPointTrails())]]></script>
+  </tool>
+
+  <tool name="tgl_point_numbers" label="Toggle Point Numbers" icon="BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+
+scene_geo.showPointNumbers(not scene_geo.isShowingPointNumbers())]]></script>
+  </tool>
+
+  <tool name="tgl_prim_numbers" label="Toggle Prim Numbers" icon="BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+
+scene_geo.showPrimNumbers(not scene_geo.isShowingPrimNumbers())]]></script>
+  </tool>
+
+  <tool name="turn_off_all_visualizers" label="Turn Off All" icon="BUTTONS_node_palette.svg">
+    <script scriptType="python"><![CDATA[sv = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+settings = sv.curViewport().settings()
+scene_geo = settings.displaySet(hou.displaySetType.DisplayModel)
+
+scene_geo.showPointMarkers(0)
+scene_geo.showPointNormals(0)
+scene_geo.showPointNumbers(0)
+scene_geo.useUVMap(0)
+scene_geo.showPrimNormals(0)
+scene_geo.showPrimNumbers(0)
+scene_geo.showPointTrails(0)]]></script>
+  </tool>
 </shelfDocument>

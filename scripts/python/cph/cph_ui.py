@@ -23,9 +23,10 @@ def openParentParametersFloating():
     except IndexError:
         hou.ui.displayMessage("An IndexError occurred. Check if there are Network Editors and selected nodes.")
 
-hou.ui.openParentParametersPane = openParentParametersFloating
+
 
 def openParentTypeProperties():
+    """Open the Type Properties of the parent node of the selected node in the current network editor."""
     try:
         if getCurrentNetworkEditorPane().type() == hou.paneTabType.NetworkEditor:
             selectedNodes = hou.selectedNodes()
@@ -42,4 +43,4 @@ def openParentTypeProperties():
         hou.ui.displayMessage("An IndexError occurred. Make sure a node is selected inside of a network editor.")
 
 hou.ui.openParentTypeProperties = openParentTypeProperties
-
+hou.ui.openParentParametersPane = openParentParametersFloating

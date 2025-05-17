@@ -20,8 +20,6 @@ import os
 from cph import cph_hdaUtils as cphda
 import hou
 
-
-
 class FileBrowserWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -50,10 +48,11 @@ class FileBrowserWidget(QtWidgets.QWidget):
         
         #ICON
         self.IconSvg = AspectRatioSvgWidget()
-        self.svgPath = 'F:/Portfolio/Projects/Glyphs/geo/glyphrnd10.1.svg'
+        self.svgPath = f'{hou.getenv("CPH")}/CPH_Icon.svg'
         self.icon_pathfield = QtWidgets.QLineEdit()
         self.IconSvg.setMaximumSize(200, 200) 
         self.IconSvg.load(self.svgPath)
+
         #ICON PATH
         self.icon_defaultpath = "Path/To/Icon"
         self.icon_pathfield.setText(self.icon_defaultpath)
@@ -76,22 +75,26 @@ class FileBrowserWidget(QtWidgets.QWidget):
 #SELECT HDAS
 #####################
     def getSelectedHDAs(self):
+        """Get the selected HDAs from the list widget"""
         hdas_paths = []
         for file in self.selectionListWidget.selectedItems():
             hdas_paths.append(file.text())
         return hdas_paths
         
     def setIcons(self):
-        
+        """Set the icon for the selected HDAs"""
         target_icon = self.icon_pathfield.text()
         if target_icon == self.icon_defaultpath:
             hou.ui.displayMessage("Please Select An SVG File.")
             return
+        
         elif not target_icon.endswith('.svg'):
-            hou.ui.displayMessage("File Type Must Be .svg")
+            hou.ui.displayMessage("File Type Must Be .svg",severity=hou.severityType.ImportantMessage)
+            return
             
         elif not len(self.getSelectedHDAs()):
             hou.ui.displayMessage("Please Select HDAs From the List")
+            return
             
 
             
@@ -126,14 +129,12 @@ class FileBrowserWidget(QtWidgets.QWidget):
             return
         
         hdaexts = ['hda','hdalc','hdanc']
-        goodpaths = []
+        hda_paths = []
         for path in paths:
-        #     for file_name in os.listdir(path):
-        #         file_path = os.path.join(path, file_name)
             for ext in hdaexts:
                 if path.endswith(f'.{ext}') :
-                    goodpaths.append(path)
-        self.updateHDASelectionList(goodpaths)
+                    hda_paths.append(path)
+        self.updateHDASelectionList(hda_paths)
 
         
     def updateHDASelectionList(self, paths):

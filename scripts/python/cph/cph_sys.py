@@ -24,5 +24,4 @@ def getScriptsFolder():
 
     return scripts_folder
 
-def Test():
-    print("cph_sys exists")
+
