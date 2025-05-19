@@ -50,7 +50,7 @@ root {
         }
     }
 }
-shelfdock -o 1 -l icon_and_text -G 0.50 add shelf_set_3
+shelfdock -o 1 -l icon_and_text -G 0.50
 treecontrol -a 0 -h 0 -i 1 -f 0 -O 0 -S 0 -D 0 -H 0 -V 0 -C 0 -I 0 -R 0 panetab14
 geospreadsheet -c 0 -l horizontal -s 0.5 -m none -f 0 panetab11
 scenegraphtree -S 0.25 -m 2 -p "/collections /lights" -c  -i  -o  -x 1 -s 1 -M 0 -C primtype,descendants,kind,populated,loaded,activation,visibility,solo,selectability  panetab11

@@ -91,6 +91,8 @@ def selectStage():
     choice_strings = [c.path() for c in choices]
     selected_indices = hou.ui.selectFromList(
     choice_strings,
+    title = "Select LOPNET",
+    num_visible_rows=5,
     exclusive=True,
     default_choices=((0,))
     )
@@ -108,7 +110,8 @@ def main():
                     '/Users/chrisp/Library/CloudStorage/GoogleDrive-pacificpatternsmusic@gmail.com/My Drive/Art/Roo/geo/Models/Environment/Desert/Foliage/Cactus_pot',
                     '/Users/chrisp/Library/CloudStorage/GoogleDrive-pacificpatternsmusic@gmail.com/My Drive/Art/Roo/geo/Models/Environment/Desert/Foliage/DryBranches']
 
-    
+
+    export_paths = []
 
     debug = 0
     run = 0
@@ -121,7 +124,7 @@ def main():
     else:
         stage = selectStage()
         folder_paths = hou.ui.selectFile(
-            title="Select Texture Folder",
+            title="Select Megascan Asset Folder",
             file_type=hou.fileType.Directory,
             multiple_select=True,
             default_value = None
@@ -140,6 +143,7 @@ def main():
         sops_imports = []
         asset_name = ''
         mat_paths = []
+        rops = []
         
         #Create Sop Subnetwork
         sop_import_subnet = stage.createNode('subnet',"Sop_Imports")
@@ -172,6 +176,7 @@ def main():
                     sop_import = sop_import_subnet.createNode('sopimport', file_sop.name())
 
                     sop_import.parm('soppath').set(file_sop.path())
+                    
 
 
         
@@ -206,6 +211,7 @@ def main():
 
         hip = hou.getenv('HIP')
         usd_rop.parm('lopoutput').set(f'{hip}/usd/{asset_name}.usd')
+        export_paths.append(usd_rop.parm('lopoutput').eval())
 
         rops.append(usd_rop)
         #Wire Sop Imports in subnetwork
@@ -223,7 +229,6 @@ def main():
 
         #Generate Textures
         for t in textures:
-            tex_names = []
             img_nodes = []
 
             tex_name = extractTexName(t)
@@ -315,37 +320,19 @@ def main():
         #TODO popup to override current save
     hou.hipFile.save(hou.hipFile.path())
 
+
+    #TODO add a scripted UI to allow user to choose they want to export as rops
     for rop in rops:
         rop.parm('executebackground').pressButton()
-
-
-    # for folder, textures in folder_textures.items():
-    # for i,matnet in enumerate(matnets):    
-    #     texs = folder_textures[hou.expandString(folder_paths[i])]
-    #     for tex in texs:
-    #         tex_name = extractTexName(tex)
-    #         matnet.createNode('mtlximage', tex_name)
-
-        # sop_import = stage.createNode('sopimport', sop.name())
-
-
-
-
-
-
-    # #Merge sop imports together
-    # for i, sop in enumerate(sopnet.children()):
-    #     sop_import = stage.createNode('sopimport', sop.name())
-    #     sop_import.parm('soppath').set(sop.path())
-    #     sop_merge.setInput(i,sop_import)
-
-
-
+        
 
     stage.layoutChildren()   
     sopnet.layoutChildren()
+    export_path_msg = '\n'.join(export_paths)
 
-
+    hou.ui.displayMessage(f"""{len(export_paths)}Exported the following paths:
+                          
+                          {export_path_msg}""")
 
 
 

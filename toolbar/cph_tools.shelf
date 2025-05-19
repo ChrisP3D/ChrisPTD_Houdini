@@ -7,5 +7,6 @@
 
   <toolshelf name="cph_tools_shelf" label="CPH Tools">
     <memberTool name="cph_megascans_to_USD"/>
+    <memberTool name="mergeMultipleHips"/>
   </toolshelf>
 </shelfDocument>

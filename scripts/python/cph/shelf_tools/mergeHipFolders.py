@@ -4,8 +4,11 @@ import hou
 
 #current_hip_path = hou.hipFile.path()
 #hou.hipFile.merge(current_hip_path)
-
+def test():
+    hou.ui.displayMessage("mergeHipFolders.py is working")
+    
 hip_extensions = (".hip", ".hiplc", ".hipnc", ".hipsc")
+
 
 def extract_hip_name(file_path):
     path_without_extension = file_path.rsplit('.', 1)[0]
@@ -72,7 +75,7 @@ def merge_hip_folders(folder_paths = None):
         other_str = "\n  ".join(other) if other else "None"
 
         # Display the message with formatted information
-        hou.ui.setStatusMessage(f"""Successfully merged {len(merged)} files.
+        hou.ui.displayMessage(f"""Successfully merged {len(merged)} files.
             Failed to merge {len(failed)} files.
             Succeeded:
             {merged_str}

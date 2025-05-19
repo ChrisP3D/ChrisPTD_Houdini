@@ -980,83 +980,9 @@ for node in hou.selectedNodes():
 # cpparm.convertAllParmsToMP(node)]]></script>
   </tool>
 
-  <tool name="mergeMultipleHips" label="Merge Hips(Multi)" icon="hicon:/SVGIcons.index?book.svg">
-    <script scriptType="python"><![CDATA[import os
-import hou
+  <tool name="mergeMultipleHips" label="Merge Hips From Directory" icon="hicon:/SVGIcons.index?book.svg">
+    <script scriptType="python"><![CDATA[from cph.shelf_tools import mergeHipFolders as mhf
 
-hip_extensions = (".hip", ".hiplc", ".hipnc", ".hipsc")
-
-def find_hip_files(folder_paths):
-    hip_files = []
-    
-    # Ensure folder_paths is a list
-    if isinstance(folder_paths, str):
-        folder_paths = [folder_paths]
-
-    for folder in folder_paths:
-        folder = folder.strip()
-        for root, _, files in os.walk(folder):
-            for filename in files:
-                if filename.endswith(hip_extensions):
-                    file_path = os.path.join(root, filename)
-                    if os.name == 'nt':  # Convert path for Windows
-                        file_path = file_path.replace("\\", "/")
-                    hip_files.append(file_path)
-    
-    return hip_files
-
-# Let the user select multiple directories
-selected_dirs = hou.ui.selectFile(
-    file_type=hou.fileType.Directory,
-    title="Select directories containing hip files",
-    multiple_select=True
-)
-
-# Process selected directories if any were chosen
-if selected_dirs:
-    # Houdini returns paths separated by semicolons, split them into a list
-    folder_paths = selected_dirs.split(';')
-
-    # Normalize paths and replace backslashes on Windows, and strip spaces
-    folder_paths = [hou.expandString(folder).replace("\\", "/").strip() for folder in folder_paths]
-
-    # Find .hip files in the selected directories
-    hip_files = find_hip_files(folder_paths)
-
-    merged = []
-    failed = []
-    other = []
-    for hip_file in hip_files:
-        try:
-            print(f"Merging file: {hip_file}")
-            hou.hipFile.merge(hip_file)
-            merged.append(hip_file)
-        except Exception as e:
-            print(f"Failed to merge file {hip_file}: {e}")
-            failed.append(hip_file)
-
-    # Identify any files that are neither in merged nor failed
-    for hip_file in hip_files:
-        if hip_file not in merged and hip_file not in failed:
-            other.append(hip_file)
-
-    # Format the lists of files for a cleaner display
-    merged_str = "\n  ".join(merged) if merged else "None"
-    failed_str = "\n  ".join(failed) if failed else "None"
-    other_str = "\n  ".join(other) if other else "None"
-
-    # Display the message with formatted information
-    hou.ui.displayMessage(f"""Successfully merged {len(merged)} files.
-Failed to merge {len(failed)} files.
-Succeeded:
-  {merged_str}
-Failed:
-  {failed_str}
-Other:
-  {other_str}
-""")
-else:
-    print("No directories selected.")
-]]></script>
+mhf.merge_hip_folders()]]></script>
   </tool>
 </shelfDocument>
