@@ -8,13 +8,14 @@
   <toolshelf name="viewport_hotkeys" label="Viewport Hotkeys">
     <memberTool name="tgl_point_markers"/>
     <memberTool name="tgl_point_normals"/>
-    <memberTool name="tgl_show_trails"/>
     <memberTool name="tgl_point_numbers"/>
+    <memberTool name="tgl_show_trails"/>
     <memberTool name="tgl_show_prim_normals"/>
     <memberTool name="tgl_prim_numbers"/>
     <memberTool name="tgl_uvs"/>
     <memberTool name="turn_off_all_visualizers"/>
     <memberTool name="tool_13"/>
+    <memberTool name="tool_1"/>
   </toolshelf>
 
   <tool name="tgl_point_markers" label="Toggle Point Markers" icon="hicon:/SVGIcons.index?BUTTONS_node_palette.svg">

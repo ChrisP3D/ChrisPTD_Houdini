@@ -13,7 +13,7 @@ def setCamera(camera, scene_viewer = None):
     cv.setCamera(camera)
 
 #UI For keyboard shortcuts
-#toggles
+#toggle UI
 def toggleOperationsBar(scene_viewer = None):
     if scene_viewer is None:
         scene_viewer = getDefaultSceneViewer()
@@ -52,5 +52,59 @@ def cycleColorScheme(scene_viewer = None):
 
 
 
+def getSceneGeo():
+    """Get the display model settings object from the current Scene Viewer."""
+    scene_viewer = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+    settings = scene_viewer.curViewport().settings()
+    return settings.displaySet(hou.displaySetType.DisplayModel)
 
-sv.showOperationBar(1)
+
+def togglePointMarkers():
+    geo = getSceneGeo()
+    geo.showPointMarkers(not geo.isShowingPointMarkers())
+
+
+def togglePointNormals():
+    geo = getSceneGeo()
+    vert_normals = geo.isShowingVertexNormals()
+    point_normals = geo.isShowingPointNormals()
+    for norm in (vert_normals, point_normals):
+        geo.showPointNormals(not norm)
+        geo.showVertexNormals(not norm)
+
+
+def togglePointNumbers():
+    geo = getSceneGeo()
+    geo.showPointNumbers(not geo.isShowingPointNumbers())
+
+
+def togglePointTrails():
+    geo = getSceneGeo()
+    geo.showPointTrails(not geo.isShowingPointTrails())
+
+
+def togglePrimNumbers():
+    geo = getSceneGeo()
+    geo.showPrimNumbers(not geo.isShowingPrimNumbers())
+
+
+def togglePrimNormals():
+    geo = getSceneGeo()
+    geo.showPrimNormals(not geo.isShowingPrimNormals())
+
+
+def toggleUVMarkers():
+    geo = getSceneGeo()
+    geo.showUVMarkers(not geo.isShowingUVMarkers())
+
+
+def turnOffAllVisualizers():
+    geo = getSceneGeo()
+    geo.showPointMarkers(False)
+    geo.showPointNormals(False)
+    geo.showVertexNormals(False)
+    geo.showPointNumbers(False)
+    geo.showPointTrails(False)
+    geo.showPrimNumbers(False)
+    geo.showPrimNormals(False)
+    geo.showUVMarkers(False)

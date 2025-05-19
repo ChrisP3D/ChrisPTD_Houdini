@@ -202,7 +202,11 @@ def getAveragePositionOfMultipleNodes(nodes):
         avg_y = total_y / num_nodes
         return hou.Vector2(avg_x, avg_y)
     
-def createKarmaMatBuilder(destination_path):
+
+
+
+
+def createKarmaMatBuilder(destination_path,name='MaterialX Builder'):
     """Taken from user: CrisDoesCG at https://www.sidefx.com/forum/topic/95981/?page=1#post-422156
     Appended the functionality to add default nodes inside the network"""
     
@@ -215,7 +219,7 @@ if i == 1 or (n_hasFlag and i == 2):
 return r'''
     destination_node = hou.node(destination_path)
  
-    subnetNode = destination_node.createNode("subnet","karmamaterial")
+    subnetNode = destination_node.createNode("subnet",name)
     subnetNode.moveToGoodPosition()
     subnetNode.setMaterialFlag(True)                  
     
@@ -248,14 +252,14 @@ return r'''
     props = subnetNode.createNode('kma_material_properties')
     surf = subnetNode.createNode('mtlxstandard_surface')
     disp = subnetNode.createNode('mtlxdisplacement')
-    
+    subnetNode.createNode('mtlxnormalmap')
     output = subnetNode.node('suboutput1')
     
     output.setInput(0, surf, 0)
     output.setInput(1, props, 0)
     output.setInput(2, disp, 0)
 
-    for node in subnetNode.children():
-        node.moveToGoodPosition()
+    subnetNode.layoutChildren()
+
     
     return subnetNode
