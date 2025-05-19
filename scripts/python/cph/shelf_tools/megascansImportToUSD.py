@@ -5,8 +5,6 @@ import os
 
 
 def createKarmaMatBuilder(destination_path,name='MaterialX Builder'):
-    """Taken from user: CrisDoesCG at https://www.sidefx.com/forum/topic/95981/?page=1#post-422156
-    Appended the functionality to add default nodes inside the network"""
     
     INHERIT_PARM_EXPRESSION = '''n = hou.pwd()
 n_hasFlag = n.isMaterialFlagSet()
