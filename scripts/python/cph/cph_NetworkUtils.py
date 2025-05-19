@@ -75,6 +75,13 @@ def SelectedSopsToStage():
     hou.ui.setStatusMessage(f'{n_imported} sopimports were added to "{lopnet.path()}"')
 
 
+def chooseLopnet():
+    choices = []  
+    for child in hou.node('/obj').allSubChildren():
+        if child.isNetwork():
+            if child.type() == hou.sopNodeTypeCategory().nodeType('lopnet') or child.type() == hou.objNodeTypeCategory().nodeType('lopnet'):
+                choices.append(child)
+
 def updateNodesInNetwork(network,node_type,target_type):
     """Updates all nodes in a network"""
     for node in network.allSubChildren():
